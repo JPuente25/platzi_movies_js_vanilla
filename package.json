@@ -1,0 +1,19 @@
+{
+  "name": "curso-practico-api-platzi",
+  "version": "1.0.0",
+  "description": "Curso practico de platzi para api rest",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JPuente25/curso-practico-api-platzi.git"
+  },
+  "author": "Jaime Puente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JPuente25/curso-practico-api-platzi/issues"
+  },
+  "homepage": "https://github.com/JPuente25/curso-practico-api-platzi#readme"
+}
