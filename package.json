@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JPuente25/curso-practico-api-platzi/issues"
   },
-  "homepage": "https://github.com/JPuente25/curso-practico-api-platzi#readme"
+  "homepage": "https://github.com/JPuente25/curso-practico-api-platzi#readme",
+  "devDependencies": {
+    "axios": "^0.27.2"
+  }
 }
