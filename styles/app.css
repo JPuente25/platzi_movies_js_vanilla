@@ -186,7 +186,8 @@ button {
   width: 72px;
 }
 
-.trendingPreview-movieList {
+.trendingPreview-movieList, .relatedMovies-scrollContainer {
+  max-width: 90%;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -284,6 +285,7 @@ button {
   position: absolute;
   background-color: var(--purple-light-1);
   height: max-content;
+  width: 100%;
 }
 
 .movieDetail-title {
@@ -311,7 +313,7 @@ button {
 
 .relatedMovies-container {
   margin-top: 24px;
-  height:1500px;
+  height:300px;
 }
 
 .relatedMovies-title {
@@ -322,13 +324,11 @@ button {
   position: absolute;
   white-space: nowrap;
   width: calc(100vw - 24px);
-  padding-bottom: 16px;
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 10px;
+  display:flex;
+  padding-left: 0;
 }
 
-.relatedMovies-scrollContainer .movie-container {
+.movie-container {
   margin-right: 8px;
 }
 

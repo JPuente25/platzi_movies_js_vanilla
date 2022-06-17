@@ -169,6 +169,7 @@ const getSimilarMovies = async (id) => {
          elementHTMLCreator({
             data: data,
             baseClass: 'movie-container',
+            mainClass: 'movie-container--related',
             parent: relatedMoviesContainer,
          })
       }
