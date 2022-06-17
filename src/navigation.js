@@ -6,7 +6,6 @@ trendingBtn.addEventListener('click',() => location.hash = 'trends=');
 
 arrowBtn.addEventListener('click',() => {
    history.back();
-   //location.hash = 'home'
 });
 
 const navigator = () => {
@@ -40,9 +39,10 @@ const homePage = () => {
 const trendsPage = () => {
    activateSections({
       arrowBtnActive: 1,
-      headerCategoryTitleActive: 1,
+      headerCategoryTitleActive:1,
       genericSectionActive: 1,
    });
+   trendingMovies();
 }
 
 const searchPage = () => {
@@ -51,7 +51,6 @@ const searchPage = () => {
       searchFormActive: 1,
       genericSectionActive: 1,
    });
-
    searchMovie(location.hash);
 }
 
@@ -64,6 +63,8 @@ const movieDetailsPage = () => {
       arrowBtnWhite: 1,
       movieDetailSectionActive: 1,
    });
+
+   getMovieById(location.hash);
 }
 
 const categoryPage = () => {
