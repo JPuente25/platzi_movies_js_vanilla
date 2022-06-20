@@ -44,7 +44,7 @@ const trendsPage = () => {
       genericSectionActive: 1,
       paginationActive: 1,
    });
-   trendingMovies();
+   trendingMovies(location.hash);
 }
 
 const searchPage = () => {

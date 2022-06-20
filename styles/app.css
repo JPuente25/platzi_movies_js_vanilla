@@ -416,14 +416,31 @@ footer {
 }
 
 .pagination-button{
+  background-color: transparent;
+  color: black;
   min-width: 30px;
   max-width: max-content;
   height: max-content;
   padding:5px;
+  border:1px solid var(--purple-dark-2);
   border-radius: 5px;
   text-align: center;
+}
+
+.pagination-button--more{
+  border: 1px solid black;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.selected-button{
+  font-weight: bold;
+  border: 3px solid var(--purple-dark-2);
+
 }
 
 .inactive {
   display: none;
 }
+

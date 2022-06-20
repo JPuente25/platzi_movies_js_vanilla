@@ -41,7 +41,7 @@ const elementHTMLCreator =  ({
          : 'https://cdn3.vectorstock.com/i/1000x1000/50/07/http-404-not-found-error-message-hypertext-vector-20025007.jpg'
          );
 
-         observer.observe(elementImg);
+      observer.observe(elementImg);
 
       elementContainer.appendChild(elementImg);
       parent.appendChild(elementContainer);
@@ -92,3 +92,46 @@ const getSimilarMovies = async (id) => {
       console.error(error);
    };
 };
+
+const createButtonMore = (text) => {
+   const buttonMore = document.createElement('button');
+   buttonMore.classList.add('pagination-button','pagination-button--more');
+   buttonMore.innerHTML = text;
+   pagination.appendChild(buttonMore);
+   return buttonMore;
+}
+
+const createPaginationButtons = (
+   firstPage,
+   lastPage,
+   totalPages,
+   actualPage
+   ) => {
+   for(let i = firstPage; i <= Math.min(lastPage,totalPages); i++){
+      const paginationButton = createButton(i,actualPage);
+      paginationButton.addEventListener('click', () => {
+         paginationPageJump(paginationButton.innerHTML)
+      });
+   }
+} 
+
+const paginationPageJump = (pagina) => {
+   if(location.hash.includes('?page=')){
+      const splitHash = location.hash.split('?page=');
+      splitHash[1] = pagina;
+      location.hash = splitHash.join('?page=');
+   }
+}
+
+const createButton = (number,actualPage) => {
+   const paginationButton = document.createElement('button');
+   paginationButton.classList.add('pagination-button');
+   console.log(actualPage);
+   if(number == actualPage){
+      console.log('hola');
+      paginationButton.classList.add('selected-button');
+   }
+   paginationButton.innerHTML = number;
+   pagination.appendChild(paginationButton);
+   return paginationButton;
+}

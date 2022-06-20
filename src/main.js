@@ -114,51 +114,64 @@ const trendingMovies = async () => {
 };
 
 const getPagination = (data) => {
-   console.log(data)
-
+   const totalPages = data.total_pages;
+   const actualPage = data.page;
    pagination.innerHTML = '';
-   const minPages = 10;
-
-   for(let i = 1; i <= Math.min(minPages,data.total_pages); i++){
-      const paginationButton = createButton(i);
-
-      //Ultima iteracion
-      if(i == minPages && i <= data.total_pages-1){
-         createButton('...')
-         const paginationButtonLast = createButton(data.total_pages);
-
-         paginationButtonLast.addEventListener('click', () => {
-            paginationPageJump(paginationButtonLast)
-         });
-      }
-
-      paginationButton.addEventListener('click', () => {
-         paginationPageJump(paginationButton)
-      });
-
-      
-      
-
-
+   const minPage = 10;
+   const firstPage = actualPage - minPage/2;
+   const lastPage = data.page + minPage/2 - 1;
+   
+   if(actualPage !== 1){
+      const buttonPrevious = createButtonMore('Anterior');
+      buttonPrevious.addEventListener('click',() => paginationPageJump(actualPage-1));
    }
 
-
-
-}
-
-const paginationPageJump = (button) => {
-
-   if(location.hash.includes('?page=')){
-      const splitHash = location.hash.split('?page=');
-      splitHash[1] = button.innerHTML;
-      location.hash = splitHash.join('?page=');
+   if(actualPage > minPage/2){
+      createPaginationButtons(firstPage,lastPage,totalPages, actualPage);
+   } else {
+      createPaginationButtons(1,minPage,totalPages, actualPage);
    }
+
+   if(lastPage < totalPages - 1){
+      const buttonNext = createButtonMore('Siguiente');
+      buttonNext.addEventListener('click',() => paginationPageJump(actualPage+1));
+   } 
 }
 
-const createButton = (number) => {
-   const paginationButton = document.createElement('button');
-   paginationButton.classList.add('pagination-button');
-   paginationButton.innerHTML = number;
-   pagination.appendChild(paginationButton);
-   return paginationButton;
-}
+// const createButtonMore = (text) => {
+//    const buttonMore = document.createElement('button');
+//    buttonMore.classList.add('pagination-button','pagination-button--more');
+//    buttonMore.innerHTML = text;
+//    pagination.appendChild(buttonMore);
+//    return buttonMore;
+// }
+
+// const createPaginationButtons = (
+//    firstPage,
+//    lastPage,
+//    totalPages,
+//    ) => {
+//    for(let i = firstPage; i <= Math.min(lastPage,totalPages); i++){
+//       const paginationButton = createButton(i);
+
+//       paginationButton.addEventListener('click', () => {
+//          paginationPageJump(paginationButton.innerHTML)
+//       });
+//    }
+// } 
+
+// const paginationPageJump = (pagina) => {
+//    if(location.hash.includes('?page=')){
+//       const splitHash = location.hash.split('?page=');
+//       splitHash[1] = pagina;
+//       location.hash = splitHash.join('?page=');
+//    }
+// }
+
+// const createButton = (number) => {
+//    const paginationButton = document.createElement('button');
+//    paginationButton.classList.add('pagination-button');
+//    paginationButton.innerHTML = number;
+//    pagination.appendChild(paginationButton);
+//    return paginationButton;
+// }
