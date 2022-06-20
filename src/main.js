@@ -1,14 +1,23 @@
 const API_KEY = '1af41b623e681d424fd48b25d8b33e10';
 const URL_TMDB = 'https://api.themoviedb.org/3'
 
-let loadCategoriesPreviewList = false;
-
 const fetchApi = axios.create({
    baseURL: 'https://api.themoviedb.org/3',
    params:{
       'api_key': API_KEY,
    }
 })
+
+const lazyLoadingMovieContainer = (entries) => {
+   entries.forEach((element)=> {
+      if (element.isIntersecting){
+         const url = element.target.getAttribute('data-img')
+         element.target.setAttribute('src',url);
+      }
+      });
+}
+
+const observer = new IntersectionObserver(lazyLoadingMovieContainer);
 
 const getCategoriesPreviewList  = async () => {
    try{
@@ -39,11 +48,14 @@ const getTrendingMoviesPreview = async () => {
 
 const getMoviesByCategory = async (hash) => {
    try{
-      const [categoryId, categoryName] = hash.split('=')[1].split('-');
+      const [trash, categoryDetails, pageNumber] = hash.split('=');
+      let [categoryId, categoryName] = categoryDetails.split('-');
+      categoryName = categoryName.split('?')[0];
       headerCategoryTitle.innerHTML = categoryName.replace('%20',' ');
       const {data,status} = await fetchApi.get('/discover/movie',{
          params: {
-            'with_genres': categoryId,             
+            'with_genres': categoryId,
+            'page': pageNumber,             
          },
       })
       if(status === 200){
@@ -53,6 +65,7 @@ const getMoviesByCategory = async (hash) => {
             mainClass: 'movie-container-category',
             parent: genericSection,
          });
+         getPagination(data);
       }
    } catch (error){
       console.error(error);
@@ -61,10 +74,13 @@ const getMoviesByCategory = async (hash) => {
 
 const searchMovie = async (hash) => {
    try{
-      const movieName = hash.split('=')[1];
+      console.log(hash)
+      let [trash,movieName,pageNumber] = hash.split('=');
+      movieName = movieName.split('?page')[0];
       const {data,status} = await fetchApi.get('/search/movie',{
          params:{
             'query': movieName,
+            'page': pageNumber,
          }
       })
       if(status === 200){
@@ -73,6 +89,7 @@ const searchMovie = async (hash) => {
             baseClass: 'movie-container',
             parent: genericSection,
          })
+         getPagination(data);
       }
    }catch (error){
       console.error(error);
@@ -96,84 +113,52 @@ const trendingMovies = async () => {
    }
 };
 
-const createCategories = (data,parent) => {
-   parent.innerHTML = '';
-   const genres = data.genres;
-   genres.forEach((genre) => {
-      const categoryPreviewContainer = document.createElement('div');
-      categoryPreviewContainer.classList.add('category-container');
-      const categoryPreviewTitle = document.createElement('h3');
-      categoryPreviewTitle.classList.add('category-title');
-      categoryPreviewTitle.id = `id${genre.id}`;
-      categoryPreviewTitle.innerHTML = genre.name;
-      categoryPreviewContainer.appendChild(categoryPreviewTitle);
-      parent.appendChild(categoryPreviewContainer);
+const getPagination = (data) => {
+   console.log(data)
 
-      categoryPreviewTitle.addEventListener('click',()=>{
-         location.hash = `category=${genre.id}-${genre.name}`;
-      }); 
-   });
-};
+   pagination.innerHTML = '';
+   const minPages = 10;
 
-const elementHTMLCreator =  ({
-   data,
-   baseClass,
-   mainClass = "",
-   parent,
-}) => {
-   mainClass ||= baseClass;  
-   parent.innerHTML= '';
-   const elements = data.results;
-   elements.forEach((element)=> {
-      const elementContainer = document.createElement('div')
-      elementContainer.classList.add(baseClass,mainClass);
-      const elementImg = document.createElement('img');
-      elementImg.classList.add('movie-img');
-      elementImg.alt = element.title;
-      elementImg.src = `https://image.tmdb.org/t/p/w300${element.poster_path}`; 
-      elementContainer.appendChild(elementImg);
-      parent.appendChild(elementContainer);
+   for(let i = 1; i <= Math.min(minPages,data.total_pages); i++){
+      const paginationButton = createButton(i);
 
-      elementContainer.addEventListener('click', () => {
-         location.hash = `movie=${element.id}`;
+      //Ultima iteracion
+      if(i == minPages && i <= data.total_pages-1){
+         createButton('...')
+         const paginationButtonLast = createButton(data.total_pages);
+
+         paginationButtonLast.addEventListener('click', () => {
+            paginationPageJump(paginationButtonLast)
+         });
+      }
+
+      paginationButton.addEventListener('click', () => {
+         paginationPageJump(paginationButton)
       });
-   })
-};
 
-const getMovieById = async (hash) => {
-   try{
-      const movieId = hash.split('=')[1];
+      
+      
 
-      const {data,status} = await fetchApi.get(`/movie/${movieId}`);
-   
-      if(status === 200){
-         const headerSectionLong = document.querySelector('.header-container--long');
-         movieDetailTitle.innerHTML = data.original_title;
-         movieDetailDescription.innerHTML = data.overview;
-         movieDetailScore.innerHTML = data.vote_average;
-         headerSectionLong.style.backgroundImage = "url('https://image.tmdb.org/t/p/w300"+data.poster_path+"')";
-         
-         createCategories(data,movieDetailCategoriesList);
-         getSimilarMovies(movieId);
-      }
-   } catch (error){
-      console.error(error);
-   }; 
-};
 
-const getSimilarMovies = async (id) => {
-   try{
-      const {data,status} = await fetchApi.get(`/movie/${id}/similar`);
-      console.log(data);
-      if(status === 200){
-         elementHTMLCreator({
-            data: data,
-            baseClass: 'movie-container',
-            mainClass: 'movie-container--related',
-            parent: relatedMoviesContainer,
-         })
-      }
-   } catch(error){
-      console.error(error);
-   };
-};
+   }
+
+
+
+}
+
+const paginationPageJump = (button) => {
+
+   if(location.hash.includes('?page=')){
+      const splitHash = location.hash.split('?page=');
+      splitHash[1] = button.innerHTML;
+      location.hash = splitHash.join('?page=');
+   }
+}
+
+const createButton = (number) => {
+   const paginationButton = document.createElement('button');
+   paginationButton.classList.add('pagination-button');
+   paginationButton.innerHTML = number;
+   pagination.appendChild(paginationButton);
+   return paginationButton;
+}

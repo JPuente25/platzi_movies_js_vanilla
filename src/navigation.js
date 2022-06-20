@@ -1,11 +1,12 @@
 searchFormBtn.addEventListener('click',() => {
-   location.hash = `search=${searchFormInput.value}`;
+   location.hash = `search=${searchFormInput.value}?page=1`;
 });
 
 trendingBtn.addEventListener('click',() => location.hash = 'trends=');
 
 arrowBtn.addEventListener('click',() => {
-   history.back();
+   //history.back();
+   location.hash = 'home';
 });
 
 const navigator = () => {
@@ -41,6 +42,7 @@ const trendsPage = () => {
       arrowBtnActive: 1,
       headerCategoryTitleActive:1,
       genericSectionActive: 1,
+      paginationActive: 1,
    });
    trendingMovies();
 }
@@ -50,6 +52,7 @@ const searchPage = () => {
       arrowBtnActive: 1,
       searchFormActive: 1,
       genericSectionActive: 1,
+      paginationActive: 1,
    });
    searchMovie(location.hash);
 }
@@ -73,6 +76,7 @@ const categoryPage = () => {
       headerTitleActive: 1,
       headerCategoryTitleActive: 1,
       genericSectionActive: 1,
+      paginationActive: 1,
    });
    getMoviesByCategory(location.hash);
 }
@@ -89,6 +93,7 @@ const activateSections = ({
    categoriesPreviewSectionActive = 0,
    genericSectionActive = 0,
    movieDetailSectionActive = 0,
+   paginationActive = 0,
 }) => {
    
    (headerSectionLong === 1)
@@ -134,4 +139,8 @@ const activateSections = ({
    (movieDetailSectionActive === 1)
       ?movieDetailSection.classList.remove('inactive')
       :movieDetailSection.classList.add('inactive');
+
+   (paginationActive === 1)
+      ?pagination.classList.remove('inactive')
+      :pagination.classList.add('inactive');
 }

@@ -29,13 +29,16 @@
       </div>
   
       <article class="trendingPreview-movieList">
-        <!-- <div class="movie-container">
-          <img
-            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-            class="movie-img"
-            alt="Nombre de la película"
-          />
-        </div>  -->
+        <div class="movie-container movie-container-loading"></div>
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
+        <div class="movie-container movie-container-loading"></div> 
       </article>
     </section>
   
@@ -43,8 +46,28 @@
       <h2 class="categoriesPreview-title">Categorías</h2>
   
       <article class="categoriesPreview-list">
+         <div class="category-container-loading category-container"></div>
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div>
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
         <!-- <div class="category-container">
-          <h3 id="id14" class="category-title">Acción</h3>
+          <h3 id="id14" class="category-container">Acción</h3>
         </div> -->
       </article>
     </section>
@@ -57,14 +80,26 @@
           alt="Nombre de la película"
         />
       </div> -->
+
     </section>
   
     <section id="movieDetail" class="movieDetail-container inactive">
-      <h1 class="movieDetail-title"></h1>
-      <span class="movieDetail-score"></span>
-      <p class="movieDetail-description"></p>
+      <h1 class="movieDetail-title">
+         <div class="movieDetail-title--loading"></div>
+      </h1>
+      <span class="movieDetail-score">
+         <div class="movieDetail-score--loading"></div>
+      </span>
+      <div class="movieDetail-description">
+         <div class="movieDetail-description--loading"></div>
+         <div class="movieDetail-description--loading"></div>
+      </div>
   
       <article class="categories-list">
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
+         <div class="category-container-loading category-container"></div> 
         <!-- <div class="category-container">
           <h3 id="id14" class="category-title">Acción</h3>
         </div> -->
@@ -74,16 +109,48 @@
         <h2 class="relatedMovies-title">Películas similares</h2>
   
         <div class="relatedMovies-scrollContainer">
-         
+            <div class="movie-container-loading"></div>
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div>
+            <div class="movie-container-loading"></div>
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div> 
+            <div class="movie-container-loading"></div>
         </div>
       </article>
     </section>
-  
+
+
+    <div class="pagination inactive">
+      <!-- <button class="pagination-button">1</button> -->
+      <!-- <p class="pagination-button--more--before">...</p> -->
+      <!-- <button class="pagination-button">2</button>
+      <button class="pagination-button">3</button>
+      <button class="pagination-button">4</button>
+      <button class="pagination-button">5</button> -->
+      <!-- <p class="pagination-button--more--after">...</p> -->
+      <!-- <button class="pagination-button">120</button>   -->
+    </div>
+
     <footer>Hecho con amor en Platzi por @infchill25</footer>
 
    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    <script src="./src/nodes.js"></script>
    <script src="./src/main.js"></script>
+   <script src="./src/functions.js"></script>
    <script src="./src/navigation.js"></script>
 </body>
 </html>

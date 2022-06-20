@@ -16,6 +16,7 @@
   --lightBlue: #A2EEE5;
   --darkBlue: #8EA2EA;
   --red: #F09D9D;
+  --loadingGrey: rgba(128, 128, 128, 0.4);
 
   --font-family-titles: 'Dosis', sans-serif;
   --font-family-text: 'Red Hat Display', sans-serif;
@@ -105,12 +106,14 @@ button {
   cursor: pointer;
 }
 
-.movie-img {
+.movie-img{
   border-radius: 8px;
 }
 
 .categoriesPreview-list, .categories-list {
-  display: flex;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:5px;
   align-items: center;
   justify-content: space-between;
   position: relative;
@@ -141,12 +144,16 @@ button {
 }
 
 .header-arrow {
+  background-color: hsla(0, 0%, 0%, 0.373);
+  border-radius: 50%;
+  padding: 0 15px 0 12px;
   font-weight: var(--font-weight-text2);
   font-size: 36px;
   margin-bottom: 16px;
   cursor: pointer;
   display: inline-block;
 }
+
 .header-arrow--white {
   color: var(--purple-light-1);
 }
@@ -322,9 +329,12 @@ button {
 
 .relatedMovies-scrollContainer {
   position: absolute;
-  white-space: nowrap;
   width: calc(100vw - 24px);
-  display:flex;
+  display:grid;
+  grid-auto-flow: column;
+  gap:10px;
+  /* grid-template-rows: 100%;
+  grid-template-columns: 100%; */
   padding-left: 0;
 }
 
@@ -332,7 +342,7 @@ button {
   margin-right: 8px;
 }
 
-.movie-img {
+.movie-img{
   width: 125px;
   min-width: 125px;
   max-width: 125px;
@@ -355,6 +365,65 @@ footer {
 
 
 /* Navigation */
+
+
+.movie-container-loading{
+  background-color: var(--loadingGrey);
+  width:125px;
+  height:187.5px;
+  border-radius: 8px;
+  animation: loading-skeleton infinite 1.5s;
+}
+
+.category-container-loading{
+  background-color: var(--loadingGrey);
+  width: 150px;
+  height:21px;
+  margin-bottom: 8px;
+  animation: loading-skeleton infinite 1.5s;
+}
+
+.movieDetail-title--loading{
+  background-color: var(--loadingGrey);
+  width: 200px;
+  height:45px;
+  animation: loading-skeleton infinite 1.5s;
+}
+
+.movieDetail-description--loading{
+  background-color: var(--loadingGrey);
+  width:600px;
+  height:25px;
+  margin-bottom: 5px;
+  animation: loading-skeleton infinite 1.5s;
+}
+
+@keyframes loading-skeleton{
+  0%, 100% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0%;
+  }
+}
+
+.pagination{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination-button{
+  min-width: 30px;
+  max-width: max-content;
+  height: max-content;
+  padding:5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .inactive {
   display: none;
 }
