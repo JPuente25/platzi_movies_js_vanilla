@@ -99,14 +99,22 @@ const trendingMovies = async () => {
             baseClass: 'movie-container',
             parent: genericSection,
          })
+         document.addEventListener('scroll',scrollListener);
 
-         const btnLoadMore = createBtnLoadMore();
-         btnLoadMore.addEventListener('click',() => getPaginatedTrendingMovies(data));
+         function scrollListener (e) {
+            const scrollHeight = document.documentElement.scrollHeight;
+            const windowHeight = document.documentElement.clientHeight;
+            const actualScroll = document.documentElement.scrollTop;
+            if(scrollHeight - windowHeight - 100 <= actualScroll){
+               e.target.removeEventListener(e.type,scrollListener);
+               getPaginatedTrendingMovies(data);
+            }
+         }
       }
    }catch (error){
       console.error(error);
    }
-};
+}
 
 const getPaginatedTrendingMovies = async (lastData) => {
    try{
@@ -122,22 +130,22 @@ const getPaginatedTrendingMovies = async (lastData) => {
             parent: genericSection,
             clear: false,
          })
+         document.addEventListener('scroll',scrollListener);
 
-         const btnLoadMore = createBtnLoadMore();
-         btnLoadMore.addEventListener('click',() => getPaginatedTrendingMovies(data));
+         function scrollListener (e) {
+            const scrollHeight = document.documentElement.scrollHeight;
+            const windowHeight = document.documentElement.clientHeight;
+            const actualScroll = document.documentElement.scrollTop;
+            if(scrollHeight - windowHeight - 100 <= actualScroll){
+               e.target.removeEventListener(e.type,scrollListener);
+               getPaginatedTrendingMovies(data);
+            }
+         }
+        
       }
    } catch (error){
       console.error(error);
    }
-}
-
-const createBtnLoadMore = () => {
-   const lastBtn = genericSection.querySelector('button');
-   if(lastBtn) genericSection.removeChild(lastBtn);   
-   const btnLoadMore = document.createElement('button');
-   btnLoadMore.innerHTML= 'Cargar mas';
-   genericSection.appendChild(btnLoadMore);
-   return btnLoadMore;
 }
 
 
