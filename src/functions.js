@@ -12,6 +12,7 @@ const createCategories = (data,parent) => {
       parent.appendChild(categoryPreviewContainer);
 
       categoryPreviewTitle.addEventListener('click',()=>{
+         genericSection.innerHTML = '';
          location.hash = `category=${genre.id}-${genre.name}`;
       }); 
    });

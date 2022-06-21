@@ -1,11 +1,16 @@
 searchFormBtn.addEventListener('click',() => {
+   genericSection.innerHTML = '';
    location.hash = `search=${searchFormInput.value}`;
 });
 
-trendingBtn.addEventListener('click',() => location.hash = 'trends=');
+trendingBtn.addEventListener('click',() => {
+   genericSection.innerHTML = '';
+   location.hash = 'trends='
+});
 
 arrowBtn.addEventListener('click',() => {
-   history.back();
+   location.hash = 'home'
+   //history.back();
 });
 
 const navigator = () => {

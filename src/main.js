@@ -46,13 +46,14 @@ const getTrendingMoviesPreview = async () => {
    }
 }
 
-const getMoviesByCategory = async (hash) => {
+const getMoviesByCategory = async (hash,lastPage = 0) => {
    try{
       const [categoryId, categoryName] = hash.split('=')[1].split('-');
       headerCategoryTitle.innerHTML = categoryName.replace('%20',' ');
       const {data,status} = await fetchApi.get('/discover/movie',{
          params: {
-            'with_genres': categoryId,            
+            'with_genres': categoryId,    
+            'page': lastPage + 1,        
          },
       })
       if(status === 200){
@@ -61,19 +62,33 @@ const getMoviesByCategory = async (hash) => {
             baseClass: 'movie-container',
             mainClass: 'movie-container-category',
             parent: genericSection,
+            clear: 0,
          });
+         document.addEventListener('scroll',scrollListener);
+         function scrollListener (e) {
+            const scrollHeight = document.documentElement.scrollHeight;
+            const windowHeight = document.documentElement.clientHeight;
+            const actualScroll = document.documentElement.scrollTop;
+            if(scrollHeight - windowHeight - 100 <= actualScroll){
+               console.log('entrando a category');
+               e.target.removeEventListener(e.type,scrollListener);
+               getMoviesByCategory(hash,data.page);
+            }
+         }
       }
    } catch (error){
       console.error(error);
    }
 };
 
-const searchMovie = async (hash) => {
+const searchMovie = async (hash,lastPage = 0) => {
+   //e.target.removeEventListener(e.type,scrollListener);
    try{
       let movieName = hash.split('=')[1];
       const {data,status} = await fetchApi.get('/search/movie',{
          params:{
             'query': movieName,
+            'page': lastPage + 1
          }
       })
       if(status === 200){
@@ -81,7 +96,20 @@ const searchMovie = async (hash) => {
             data: data,
             baseClass: 'movie-container',
             parent: genericSection,
+            clear: 0,
          })
+         document.addEventListener('scroll',scrollListener);
+         function scrollListener (e) {
+            const scrollHeight = document.documentElement.scrollHeight;
+            const windowHeight = document.documentElement.clientHeight;
+            const actualScroll = document.documentElement.scrollTop;
+            if(scrollHeight - windowHeight - 100 <= actualScroll){
+               e.target.removeEventListener(e.type,scrollListener);
+               console.log('entrando a search');
+               console.log(e.target);
+               searchMovie(hash,data.page);
+            }
+         }
       }
    }catch (error){
       console.error(error);
@@ -91,7 +119,6 @@ const searchMovie = async (hash) => {
 
 const trendingMovies = async (lastPage = 0) => {
    headerCategoryTitle.innerHTML = 'Tendencias';
-   console.log(lastPage);
    try{
       const {data, status} = await fetchApi.get('/trending/movie/day',{
          params:{
@@ -106,13 +133,12 @@ const trendingMovies = async (lastPage = 0) => {
             clear: 0,
          })
          document.addEventListener('scroll',scrollListener);
-
          function scrollListener (e) {
             const scrollHeight = document.documentElement.scrollHeight;
             const windowHeight = document.documentElement.clientHeight;
             const actualScroll = document.documentElement.scrollTop;
             if(scrollHeight - windowHeight - 100 <= actualScroll){
-               console.log('entrando');
+               console.log('entrando a trend');
                e.target.removeEventListener(e.type,scrollListener);
                trendingMovies(data.page);
             }
@@ -121,38 +147,6 @@ const trendingMovies = async (lastPage = 0) => {
    }catch (error){
       console.error(error);
    }
-}
-
-// const getPaginatedTrendingMovies = async (lastData) => {
-//    try{
-//       const {data, status} = await fetchApi.get('/trending/movie/day',{
-//          params:{
-//             'page': lastData.page+1,
-//          }
-//       });
-//       if(status === 200){
-//          elementHTMLCreator({
-//             data: data,
-//             baseClass: 'movie-container',
-//             parent: genericSection,
-//             clear: false,
-//          })
-//          document.addEventListener('scroll',scrollListener);
-
-//          function scrollListener (e) {
-//             const scrollHeight = document.documentElement.scrollHeight;
-//             const windowHeight = document.documentElement.clientHeight;
-//             const actualScroll = document.documentElement.scrollTop;
-//             if(scrollHeight - windowHeight - 100 <= actualScroll){
-//                e.target.removeEventListener(e.type,scrollListener);
-//                getPaginatedTrendingMovies(data);
-//             }
-//          }
-        
-//       }
-//    } catch (error){
-//       console.error(error);
-//    }
-// }
+};
 
 
