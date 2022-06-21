@@ -13,7 +13,7 @@ const createCategories = (data,parent) => {
       parent.appendChild(categoryPreviewContainer);
 
       categoryPreviewTitle.addEventListener('click',()=>{
-         location.hash = `category=${genre.id}-${genre.name}?page=1`;
+         location.hash = `category=${genre.id}-${genre.name}`;
       }); 
    });
 };
@@ -93,45 +93,5 @@ const getSimilarMovies = async (id) => {
    };
 };
 
-const createButtonMore = (text) => {
-   const buttonMore = document.createElement('button');
-   buttonMore.classList.add('pagination-button','pagination-button--more');
-   buttonMore.innerHTML = text;
-   pagination.appendChild(buttonMore);
-   return buttonMore;
-}
 
-const createPaginationButtons = (
-   firstPage,
-   lastPage,
-   totalPages,
-   actualPage
-   ) => {
-   for(let i = firstPage; i <= Math.min(lastPage,totalPages); i++){
-      const paginationButton = createButton(i,actualPage);
-      paginationButton.addEventListener('click', () => {
-         paginationPageJump(paginationButton.innerHTML)
-      });
-   }
-} 
 
-const paginationPageJump = (pagina) => {
-   if(location.hash.includes('?page=')){
-      const splitHash = location.hash.split('?page=');
-      splitHash[1] = pagina;
-      location.hash = splitHash.join('?page=');
-   }
-}
-
-const createButton = (number,actualPage) => {
-   const paginationButton = document.createElement('button');
-   paginationButton.classList.add('pagination-button');
-   console.log(actualPage);
-   if(number == actualPage){
-      console.log('hola');
-      paginationButton.classList.add('selected-button');
-   }
-   paginationButton.innerHTML = number;
-   pagination.appendChild(paginationButton);
-   return paginationButton;
-}

@@ -1,12 +1,11 @@
 searchFormBtn.addEventListener('click',() => {
-   location.hash = `search=${searchFormInput.value}?page=1`;
+   location.hash = `search=${searchFormInput.value}`;
 });
 
 trendingBtn.addEventListener('click',() => location.hash = 'trends=');
 
 arrowBtn.addEventListener('click',() => {
-   //history.back();
-   location.hash = 'home';
+   history.back();
 });
 
 const navigator = () => {
@@ -39,20 +38,20 @@ const homePage = () => {
 
 const trendsPage = () => {
    activateSections({
+      headerTitleActive: 1,
       arrowBtnActive: 1,
       headerCategoryTitleActive:1,
       genericSectionActive: 1,
-      paginationActive: 1,
    });
    trendingMovies(location.hash);
 }
 
 const searchPage = () => {
    activateSections({
+      headerTitleActive: 1,
       arrowBtnActive: 1,
       searchFormActive: 1,
       genericSectionActive: 1,
-      paginationActive: 1,
    });
    searchMovie(location.hash);
 }
@@ -60,6 +59,7 @@ const searchPage = () => {
 
 const movieDetailsPage = () => {
    activateSections({
+      headerTitleActive: 1,
       headerSectionLong: 1,
       headerSectionBackground: 1,
       arrowBtnActive: 1,
@@ -72,11 +72,11 @@ const movieDetailsPage = () => {
 
 const categoryPage = () => {
    activateSections({
+      headerTitleActive: 1,
       arrowBtnActive: 1,
       headerTitleActive: 1,
       headerCategoryTitleActive: 1,
       genericSectionActive: 1,
-      paginationActive: 1,
    });
    getMoviesByCategory(location.hash);
 }
@@ -93,7 +93,6 @@ const activateSections = ({
    categoriesPreviewSectionActive = 0,
    genericSectionActive = 0,
    movieDetailSectionActive = 0,
-   paginationActive = 0,
 }) => {
    
    (headerSectionLong === 1)
@@ -139,8 +138,4 @@ const activateSections = ({
    (movieDetailSectionActive === 1)
       ?movieDetailSection.classList.remove('inactive')
       :movieDetailSection.classList.add('inactive');
-
-   (paginationActive === 1)
-      ?pagination.classList.remove('inactive')
-      :pagination.classList.add('inactive');
 }
