@@ -1,5 +1,4 @@
 const createCategories = (data,parent) => {
-   console.log(data);
    parent.innerHTML = '';
    const genres = data.genres;
    genres.forEach((genre) => {
@@ -24,9 +23,10 @@ const elementHTMLCreator =  ({
    baseClass,
    mainClass = "",
    parent,
+   clear = true,
 }) => {
    mainClass ||= baseClass; 
-   parent.innerHTML= '';
+   if(clear) parent.innerHTML= '';
    const elements = data.results;
    elements.forEach((element)=> {
       const elementContainer = document.createElement('div')
@@ -56,7 +56,6 @@ const elementHTMLCreator =  ({
 const getMovieById = async (hash) => {
    try{
       const movieId = hash.split('=')[1];
-
       const {data,status} = await fetchApi.get(`/movie/${movieId}`);
    
       if(status === 200){
@@ -79,7 +78,6 @@ const getMovieById = async (hash) => {
 const getSimilarMovies = async (id) => {
    try{
       const {data,status} = await fetchApi.get(`/movie/${id}/similar`);
-      console.log(data);
       if(status === 200){
          elementHTMLCreator({
             data: data,

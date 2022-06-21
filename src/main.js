@@ -99,10 +99,45 @@ const trendingMovies = async () => {
             baseClass: 'movie-container',
             parent: genericSection,
          })
+
+         const btnLoadMore = createBtnLoadMore();
+         btnLoadMore.addEventListener('click',() => getPaginatedTrendingMovies(data));
       }
    }catch (error){
       console.error(error);
    }
 };
+
+const getPaginatedTrendingMovies = async (lastData) => {
+   try{
+      const {data, status} = await fetchApi.get('/trending/movie/day',{
+         params:{
+            'page': lastData.page+1,
+         }
+      });
+      if(status === 200){
+         elementHTMLCreator({
+            data: data,
+            baseClass: 'movie-container',
+            parent: genericSection,
+            clear: false,
+         })
+
+         const btnLoadMore = createBtnLoadMore();
+         btnLoadMore.addEventListener('click',() => getPaginatedTrendingMovies(data));
+      }
+   } catch (error){
+      console.error(error);
+   }
+}
+
+const createBtnLoadMore = () => {
+   const lastBtn = genericSection.querySelector('button');
+   if(lastBtn) genericSection.removeChild(lastBtn);   
+   const btnLoadMore = document.createElement('button');
+   btnLoadMore.innerHTML= 'Cargar mas';
+   genericSection.appendChild(btnLoadMore);
+   return btnLoadMore;
+}
 
 
