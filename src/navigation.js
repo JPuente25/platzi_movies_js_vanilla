@@ -43,7 +43,7 @@ const trendsPage = () => {
       headerCategoryTitleActive:1,
       genericSectionActive: 1,
    });
-   trendingMovies(location.hash);
+   trendingMovies();
 }
 
 const searchPage = () => {
