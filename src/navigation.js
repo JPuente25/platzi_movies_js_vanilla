@@ -35,6 +35,7 @@ const homePage = () => {
    });
    getTrendingMoviesPreview();
    getCategoriesPreviewList();
+   getFavoritesMovies();
 }
 
 const trendsPage = () => {
@@ -42,7 +43,6 @@ const trendsPage = () => {
       arrowBtnActive: 1,
       headerCategoryTitleActive:1,
       genericSectionActive: 1,
-      paginationActive: 1,
    });
    trendingMovies(location.hash);
 }

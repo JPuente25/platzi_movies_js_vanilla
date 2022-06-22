@@ -90,11 +90,13 @@ button {
 
 
 /* Shared */
-.header-container, .trendingPreview-header, .categoriesPreview-container {
+.header-container, .trendingPreview-header, .categoriesPreview-container,
+.likes-container {
   padding: 0 24px;
 }
 
-.trendingPreview-container, .categoriesPreview-container, footer {
+.trendingPreview-container, .categoriesPreview-container, footer,
+.likes-container {
   margin-top: 48px;
 }
 
@@ -181,7 +183,7 @@ button {
 
 
 /* Trending */
-.trendingPreview-header {
+.trendingPreview-header, .likes-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -193,28 +195,33 @@ button {
   width: 72px;
 }
 
-.trendingPreview-movieList, .relatedMovies-scrollContainer {
+.trendingPreview-movieList, .relatedMovies-scrollContainer, .likes-movieList  {
   max-width: 90%;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  height: 241px;
+  height: 260px;
   padding-left: 24px;
   padding-bottom: 16px;
 }
 
-.trendingPreview-movieList .movie-container {
+
+.trendingPreview-movieList .movie-container, .likes-movieList  {
   display: inline-block;
   margin-right: 8px;
 }
 
-.trendingPreview-movieList .movie-container .movie-img {
+.trendingPreview-movieList .movie-container .movie-img  {
   height: 225px;
   min-height: 225px;
   max-height: 225px;
   width: 150px;
   min-width: 150px;
   max-width: 150px;
+}
+
+.likes-movieList{
+  display:flex;
 }
 
 
@@ -343,6 +350,7 @@ button {
 }
 
 .movie-img{
+  position: relative;
   width: 125px;
   min-width: 125px;
   max-width: 125px;
@@ -440,7 +448,24 @@ footer {
 
 }
 
+.movie-btn{
+  z-index: 1;
+  position: relative;
+  left:-30px;
+  top:-12px;
+  background-color: transparent;
+}
+
+.movie-btn::before{
+  content: '✅';
+}
+
+.movie-btn--like::before{
+  content: '❌';
+}
+
 .inactive {
   display: none;
 }
+
 
