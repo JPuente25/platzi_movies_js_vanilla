@@ -128,7 +128,7 @@ const getSimilarMovies = async (id) => {
 
 const createButtonMore = (text) => {
    const buttonMore = document.createElement('button');
-   buttonMore.classList.add('pagination-button','pagination-button--more');
+   buttonMore.classList.add('pagination-button','pagination-button--'+text);
    buttonMore.innerHTML = text;
    pagination.appendChild(buttonMore);
    return buttonMore;

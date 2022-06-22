@@ -1,5 +1,6 @@
 const API_KEY = "1af41b623e681d424fd48b25d8b33e10";
 const URL_TMDB = "https://api.themoviedb.org/3";
+const observer = new IntersectionObserver(lazyLoadingMovieContainer);
 
 const fetchApi = axios.create({
    baseURL: "https://api.themoviedb.org/3",
@@ -8,7 +9,7 @@ const fetchApi = axios.create({
    },
 });
 
-const lazyLoadingMovieContainer = (entries) => {
+function lazyLoadingMovieContainer (entries) {
    entries.forEach((element) => {
       if (element.isIntersecting) {
          const url = element.target.getAttribute("data-img");
@@ -16,8 +17,6 @@ const lazyLoadingMovieContainer = (entries) => {
       }
    });
 };
-
-const observer = new IntersectionObserver(lazyLoadingMovieContainer);
 
 const getCategoriesPreviewList = async () => {
    try {
@@ -97,7 +96,7 @@ const searchMovie = async (hash) => {
 };
 
 const trendingMovies = async () => {
-   headerCategoryTitle.innerHTML = "Tendencias";
+   headerCategoryTitle.innerHTML = "Trendings";
    try {
       const { data, status } = await fetchApi.get("/trending/movie/day");
       if (status === 200) {
@@ -123,6 +122,8 @@ const getPagination = (data) => {
    if (actualPage !== 1) {
       const buttonPrevious = createButtonMore("Anterior");
       buttonPrevious.addEventListener("click", () => paginationPageJump(actualPage - 1));
+   } else{
+      const buttonPrevious = createButtonMore("relleno");
    }
 
    if (actualPage > minPage / 2) {

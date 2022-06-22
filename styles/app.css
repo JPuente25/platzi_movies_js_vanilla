@@ -236,6 +236,7 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width:max-content;
 }
 
 .category-title::before {
@@ -416,18 +417,27 @@ footer {
 }
 
 .pagination{
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
+  width: max-content;
+  margin: 50px auto 0 auto;
+}
+
+@media (min-width: 720px){
+  .pagination{
+    display:flex;
+    justify-content: center;
+  }
 }
 
 .pagination-button{
   background-color: transparent;
   color: black;
   min-width: 30px;
-  max-width: max-content;
+  max-width: 80%;
   height: max-content;
   padding:5px;
   border:1px solid var(--purple-dark-2);
@@ -435,11 +445,29 @@ footer {
   text-align: center;
 }
 
-.pagination-button--more{
+.pagination-button--Anterior,.pagination-button--Siguiente,.pagination-button--relleno{
   border: 1px solid black;
   color: black;
   font-weight: bold;
   font-size: 16px;
+  max-width: 100%;
+}
+
+.pagination-button--Anterior, .pagination-button--relleno{
+  grid-row: 1/3;
+  grid-column: 1/3;
+}
+
+.pagination-button--Siguiente{
+  grid-row: 1/3;
+  grid-column: 8/10;
+
+}
+
+.pagination-button--relleno{
+background-color: transparent;
+border: none;
+color:transparent;
 }
 
 .selected-button{
