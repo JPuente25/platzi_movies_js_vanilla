@@ -32,6 +32,7 @@ const homePage = () => {
       searchFormActive: 1,
       trendingPreviewSectionActive: 1,
       categoriesPreviewSectionActive: 1,
+      likesContainerActive: 1,
    });
    getTrendingMoviesPreview();
    getCategoriesPreviewList();
@@ -94,6 +95,7 @@ const activateSections = ({
    genericSectionActive = 0,
    movieDetailSectionActive = 0,
    paginationActive = 0,
+   likesContainerActive = 0,
 }) => {
    
    (headerSectionLong === 1)
@@ -143,4 +145,8 @@ const activateSections = ({
    (paginationActive === 1)
       ?pagination.classList.remove('inactive')
       :pagination.classList.add('inactive');
+
+   (likesContainerActive === 1)
+      ?likesContainer.classList.remove('inactive')
+      :likesContainer.classList.add('inactive');
 }

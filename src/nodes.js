@@ -7,12 +7,14 @@ const movieDetailSection = document.querySelector('#movieDetail');
 const pagination = document.querySelector('.pagination');
 const likesMovieList = document.querySelector('.likes-movieList');
 
+
 // Lists & Containers
 const searchForm = document.querySelector('#searchForm');
 const trendingMoviesPreviewList = document.querySelector('.trendingPreview-movieList');
 const categoriesPreviewList = document.querySelector('.categoriesPreview-list');
 const movieDetailCategoriesList = document.querySelector('#movieDetail .categories-list');
 const relatedMoviesContainer = document.querySelector('.relatedMovies-scrollContainer');
+const likesContainer = document.querySelector('.likes-container');
 
 // Elements
 const headerTitle = document.querySelector('.header-title');
