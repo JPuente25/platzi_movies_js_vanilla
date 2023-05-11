@@ -1,5 +1,5 @@
 {
-  "name": "curso-practico-api-platzi",
+  "name": "platzimovies",
   "version": "1.0.0",
   "description": "Curso practico de platzi para api rest",
   "main": "index.html",
@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/JPuente25/curso-practico-api-platzi/issues"
   },
-  "homepage": "https://github.com/JPuente25/curso-practico-api-platzi#readme",
+  "homepage": "https://JPuente25.github.io/platzimovies",
   "devDependencies": {
     "axios": "^0.27.2"
   }

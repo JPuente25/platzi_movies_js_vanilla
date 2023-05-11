@@ -1,4 +1,4 @@
-const API_KEY = "1af41b623e681d424fd48b25d8b33e10";
+const API_KEY = "88e1b4af6e39907f7712618a9cc00e88";
 const URL_TMDB = "https://api.themoviedb.org/3";
 const observer = new IntersectionObserver(lazyLoadingMovieContainer);
 
@@ -8,7 +8,7 @@ const fetchApi = axios.create({
       api_key: API_KEY,
       language: 'en',
    },
-});
+}); //MIGRADO
 
 function lazyLoadingMovieContainer (entries) {
    entries.forEach((element) => {
@@ -17,7 +17,7 @@ function lazyLoadingMovieContainer (entries) {
          element.target.setAttribute("src", url);
       }
    });
-};
+}; //PENDIENTE
 
 const getCategoriesPreviewList = async () => {
    try {
@@ -28,7 +28,7 @@ const getCategoriesPreviewList = async () => {
    } catch (error) {
       console.error(error);
    }
-};
+}; //MIGRADO
 
 const getTrendingMoviesPreview = async () => {
    try {
@@ -44,7 +44,7 @@ const getTrendingMoviesPreview = async () => {
    } catch (error) {
       console.error(error);
    }
-};
+}; //MIGRADO
 
 const getMoviesByCategory = async (hash) => {
    try {
@@ -70,7 +70,7 @@ const getMoviesByCategory = async (hash) => {
    } catch (error) {
       console.error(error);
    }
-};
+}; //MIGRADO
 
 const searchMovie = async (hash) => {
    try {
@@ -94,7 +94,7 @@ const searchMovie = async (hash) => {
    } catch (error) {
       console.error(error);
    }
-};
+}; //MIGRADO
 
 const trendingMovies = async () => {
    headerCategoryTitle.innerHTML = "Trendings";
@@ -110,7 +110,7 @@ const trendingMovies = async () => {
    } catch (error) {
       console.error(error);
    }
-};
+}; //MIGRADO
 
 const getPagination = (data) => {
    const totalPages = data.total_pages;
@@ -123,8 +123,6 @@ const getPagination = (data) => {
    if (actualPage !== 1) {
       const buttonPrevious = createButtonMore("Anterior");
       buttonPrevious.addEventListener("click", () => paginationPageJump(actualPage - 1));
-   } else{
-      const buttonPrevious = createButtonMore("relleno");
    }
 
    if (actualPage > minPage / 2) {
@@ -137,7 +135,7 @@ const getPagination = (data) => {
       const buttonNext = createButtonMore("Siguiente");
       buttonNext.addEventListener("click", () => paginationPageJump(actualPage + 1));
    }
-};
+}; //MIGRADO
 
 const getFavoritesMovies = () => {
    const data = {results: []};
@@ -150,4 +148,4 @@ const getFavoritesMovies = () => {
       baseClass: 'movie-container',
       parent: likesMovieList,
    })
-}
+} //PENDIENTE

@@ -20,7 +20,7 @@ const navigator = () => {
          ? categoryPage()
          : homePage();
    window.scrollTo( 0, 0 );
-}
+} //MIGRADO
 
 window.addEventListener('DOMContentLoaded', navigator);
 
@@ -37,7 +37,7 @@ const homePage = () => {
    getTrendingMoviesPreview();
    getCategoriesPreviewList();
    getFavoritesMovies();
-}
+} //MIGRADO
 
 const trendsPage = () => {
    activateSections({
@@ -46,7 +46,7 @@ const trendsPage = () => {
       genericSectionActive: 1,
    });
    trendingMovies(location.hash);
-}
+} //MIGRADO
 
 const searchPage = () => {
    activateSections({
@@ -56,7 +56,7 @@ const searchPage = () => {
       paginationActive: 1,
    });
    searchMovie(location.hash);
-}
+} //MIGRADO
 
 
 const movieDetailsPage = () => {
@@ -69,7 +69,7 @@ const movieDetailsPage = () => {
    });
 
    getMovieById(location.hash);
-}
+} //MIGRADO
 
 const categoryPage = () => {
    activateSections({
@@ -80,7 +80,7 @@ const categoryPage = () => {
       paginationActive: 1,
    });
    getMoviesByCategory(location.hash);
-}
+} //MIGRADO
 
 const activateSections = ({
    headerSectionLong = 0,
@@ -149,4 +149,4 @@ const activateSections = ({
    (likesContainerActive === 1)
       ?likesContainer.classList.remove('inactive')
       :likesContainer.classList.add('inactive');
-}
+} //MIGRADO

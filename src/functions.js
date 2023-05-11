@@ -15,7 +15,7 @@ const createCategories = (data,parent) => {
          location.hash = `category=${genre.id}-${genre.name}?page=1`;
       }); 
    });
-};
+}; //NO HACE FALTA
 
 const elementHTMLCreator =  ({
    data,
@@ -72,7 +72,7 @@ const elementHTMLCreator =  ({
          location.hash = `movie=${element.id}`;
       });
    })
-};
+}; //NO HACE FALTA
 
 //AGREGAR OBJETOS A LOCALSTORAGE
 function addMovieLocalStorage (movie) {
@@ -105,7 +105,7 @@ const getMovieById = async (hash) => {
    } catch (error){
       console.error(error);
    }; 
-};
+}; //MIGRADO
 
 
 
@@ -124,7 +124,7 @@ const getSimilarMovies = async (id) => {
    } catch(error){
       console.error(error);
    };
-};
+}; //MIGRADO
 
 const createButtonMore = (text) => {
    const buttonMore = document.createElement('button');
@@ -132,7 +132,7 @@ const createButtonMore = (text) => {
    buttonMore.innerHTML = text;
    pagination.appendChild(buttonMore);
    return buttonMore;
-}
+} //MIGRADO 
 
 const createPaginationButtons = (
    firstPage,
@@ -146,7 +146,7 @@ const createPaginationButtons = (
          paginationPageJump(paginationButton.innerHTML)
       });
    }
-} 
+} //MIGRADO
 
 const paginationPageJump = (pagina) => {
    if(location.hash.includes('?page=')){
@@ -154,7 +154,7 @@ const paginationPageJump = (pagina) => {
       splitHash[1] = pagina;
       location.hash = splitHash.join('?page=');
    }
-}
+} //MIGRADO
 
 const createButton = (number,actualPage) => {
    const paginationButton = document.createElement('button');
@@ -165,4 +165,4 @@ const createButton = (number,actualPage) => {
    paginationButton.innerHTML = number;
    pagination.appendChild(paginationButton);
    return paginationButton;
-}
+} //MIGRADO
